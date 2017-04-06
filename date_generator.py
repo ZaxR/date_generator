@@ -16,20 +16,18 @@ class DateGenerator(tk.Frame):
         tk.Label(self.root, text="Start Year: ").grid(row=0)
         start = tk.StringVar(self.root)
         start.set(1997)
-        start_year = tk.OptionMenu(self.root, start, *year_choices)
-        start_year.grid(column=1, row=0)
+        tk.OptionMenu(self.root, start, *year_choices).grid(column=1, row=0)
 
         tk.Label(self.root, text="End Year: ").grid(row=1)
         end = tk.StringVar(self.root)
         end.set(2017)
-        end_year = tk.OptionMenu(self.root, end, *year_choices)
-        end_year.grid(column=1, row=1)
+        tk.OptionMenu(self.root, end, *year_choices).grid(column=1, row=1)
 
-        self.root.bind('<Button-1>', lambda x=start.get(), y=end.get(): self.get_date_list(start.get(), end.get()))
+        self.root.bind('<Button-1>', lambda x=0, y=0: self.get_date_list(start.get(), end.get()))
         self.grid()
 
-        self.submit = tk.Button(self.root, text = "Submit")
-        self.submit.bind('<Button-1>', lambda x=start.get(), y=end.get(): self.get_date_list(start.get(), end.get()))
+        self.submit = tk.Button(self.root, text = "Generate")
+        self.submit.bind('<Button-1>', lambda x=0, y=0: self.get_date_list(start.get(), end.get()))
         self.submit.grid(column=1, row=4)
 
     def get_date_list(self, start_year, end_year):
