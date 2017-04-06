@@ -4,8 +4,9 @@ Generates dates between a given range in the followingformat:
 
 <b> Roadmap: </b>
 
-* Correct layout
-* Add exit button
+* QoL improvements:
+  * Save csv before exiting
+  * Also allow user to push "Enter" on keyboard to run
 * Add success/failure messages to user
+* Add file path/naming selection option
 * Add other freuencies (weekly, monthly)
-* Add file path/naming option
