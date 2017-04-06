@@ -5,29 +5,32 @@ class DateGenerator(tk.Frame):
     def __init__(self):
         self.root = tk.Tk()
         self.root.geometry("300x200")
+        self.root.wm_title("Date Generator")
 
         tk.Frame.__init__(self, self.root)
         self.create_widgets()
 
     def create_widgets(self):
         year_choices = [i for i in range(1896, 2051)]
-        
+
+        tk.Label(self.root, text="Start Year: ").grid(row=0)
         start = tk.StringVar(self.root)
         start.set(1997)
         start_year = tk.OptionMenu(self.root, start, *year_choices)
-        start_year.grid(column=2, row=2)
-        
+        start_year.grid(column=1, row=0)
+
+        tk.Label(self.root, text="End Year: ").grid(row=1)
         end = tk.StringVar(self.root)
         end.set(2017)
         end_year = tk.OptionMenu(self.root, end, *year_choices)
-        end_year.grid(column=2, row=3)
+        end_year.grid(column=1, row=1)
 
         self.root.bind('<Button-1>', lambda x=start.get(), y=end.get(): self.get_date_list(start.get(), end.get()))
         self.grid()
 
-        self.submit = tk.Button(self, text = "Submit")
+        self.submit = tk.Button(self.root, text = "Submit")
         self.submit.bind('<Button-1>', lambda x=start.get(), y=end.get(): self.get_date_list(start.get(), end.get()))
-        self.submit.grid(column=2, row=4)
+        self.submit.grid(column=1, row=4)
 
     def get_date_list(self, start_year, end_year):
         start_year = int(start_year)
@@ -36,7 +39,7 @@ class DateGenerator(tk.Frame):
             date_list = self.count_back(start_year, end_year)
         else:
             date_list = self.create_date_range(start_year, end_year)
-        
+
         self.write_to_csv(start_year, end_year, date_list)
     
     def count_back(self, start_year, end_year):
