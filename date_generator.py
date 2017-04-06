@@ -61,7 +61,8 @@ class DateGenerator(tk.Frame):
         file_name = "Dates {0} to {1} quarterly.csv".format(start_year, end_year)
         with open(file_name, 'w') as csv_file:
             writer = csv.writer(csv_file, lineterminator='\n')
-            writer.writerow(date_list)  # todo figure out how to write in column
+            for date in date_list:
+                writer.writerow([date])
 
     def start(self):
         self.root.mainloop()
