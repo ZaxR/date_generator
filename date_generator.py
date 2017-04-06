@@ -12,24 +12,26 @@ class DateGenerator(tk.Frame):
     def create_widgets(self):
         year_choices = [i for i in range(1896, 2051)]
         
-        start = StringVar(self.root)
+        start = tk.StringVar(self.root)
         start.set(1997)
-        start_year = OptionMenu(self.root, start, *year_choices)
+        start_year = tk.OptionMenu(self.root, start, *year_choices)
+        start_year.grid(column=2, row=2)
         
-        end = StringVar(self.root)
+        end = tk.StringVar(self.root)
         end.set(2017)
-        end_year = OptionMenu(self.root, end, *year_choices)
-        
-        self.root.bind('<Return>', lambda event, s = start_year, f = end_year: self.get_date_list(start_year, end_year))
+        end_year = tk.OptionMenu(self.root, end, *year_choices)
+        end_year.grid(column=2, row=3)
+
+        self.root.bind('<Button-1>', lambda x=start.get(), y=end.get(): self.get_date_list(start.get(), end.get()))
         self.grid()
 
         self.submit = tk.Button(self, text = "Submit")
-        self.submit.bind('<Button-1>', lambda event, s = start_year, f = end_year: self.get_date_list(start_year, end_year))
-        self.submit.grid()
+        self.submit.bind('<Button-1>', lambda x=start.get(), y=end.get(): self.get_date_list(start.get(), end.get()))
+        self.submit.grid(column=2, row=4)
 
-    def get_date_list(self, event, start_year, end_year):
-        # start_year = int(start_year)
-        # end_year = int(end_year)
+    def get_date_list(self, start_year, end_year):
+        start_year = int(start_year)
+        end_year = int(end_year)
         if start_year > end_year:
             date_list = self.count_back(start_year, end_year)
         else:
