@@ -1,5 +1,6 @@
 import csv
 import tkinter as tk
+from tkinter import ttk
 
 
 class DateGenerator(tk.Frame):
@@ -17,12 +18,14 @@ class DateGenerator(tk.Frame):
         tk.Label(self.root, text="Start Year: ").grid(row=0)
         start = tk.StringVar(self.root)
         start.set(1997)
-        tk.OptionMenu(self.root, start, *year_choices).grid(column=1, row=0)
+        start_year = ttk.Combobox(self.root, textvariable=start, values=year_choices, state='readonly')
+        start_year.grid(column=1, row=0)
 
         tk.Label(self.root, text="End Year: ").grid(row=1)
         end = tk.StringVar(self.root)
         end.set(2017)
-        tk.OptionMenu(self.root, end, *year_choices).grid(column=1, row=1)
+        end_year = ttk.Combobox(self.root, textvariable=end, values=year_choices, state='readonly')
+        end_year.grid(column=1, row=1)
 
         #Allow pushing enter to run, but causes all previous selections to be saved
         #self.root.bind('<Button-1>', lambda x=0, y=0: self.get_date_list(start.get(), end.get()))
